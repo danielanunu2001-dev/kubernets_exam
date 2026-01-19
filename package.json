@@ -1,23 +1,38 @@
 {
   "name": "bibliotheque-api",
   "version": "1.0.0",
-  "description": "API REST Node.js/Express pour gestion de bibliothèque avec JWT et Sequelize",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielanunu2001-dev/kubernets_exam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/danielanunu2001-dev/kubernets_exam/issues"
+  },
+  "homepage": "https://github.com/danielanunu2001-dev/kubernets_exam#readme",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "dotenv": "^16.6.1",
-    "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "pg": "^8.16.3",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "pg": "^8.17.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.6"
+    "socket.io": "^4.8.3",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.1.11"
   }
 }

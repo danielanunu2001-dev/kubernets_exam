@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  # L'URL du backend (sans /api à la fin)
+  REACT_APP_API_URL: "http://biblio-service:3000"

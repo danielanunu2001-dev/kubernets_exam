@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biblio-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bibliotheque
+  template:
+    metadata:
+      labels:
+        app: bibliotheque
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: bibliotheque
+          image: dananunu/bibliotheque-api:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: biblio-secret
+            - configMapRef:
+                name: biblio-config
+          env:
+            - name: DATABASE_URL
+              value: "sqlite:/app/data/database.sqlite"
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/data
+      volumes:
+        - name: sqlite-data
+          emptyDir: {}
