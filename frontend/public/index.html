@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -40,4 +41,107 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+=======
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Backend Library</title>
+</head>
+<body>
+  <h1>Test Backend Library</h1>
+
+  <h2>Connexion</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Mot de passe">
+  <button onclick="login()">Se connecter</button>
+
+  <h2>Liste des utilisateurs</h2>
+  <button onclick="getUsers()">Voir les utilisateurs</button>
+  <pre id="users"></pre>
+
+  <h2>Liste des livres</h2>
+  <button onclick="getBooks()">Voir les livres</button>
+  <pre id="books"></pre>
+
+  <h2>Liste des prêts d'un utilisateur</h2>
+  <input type="number" id="userIdLoan" placeholder="ID utilisateur">
+  <button onclick="getLoans()">Voir prêts</button>
+  <pre id="loans"></pre>
+
+  <h2>Créer un prêt</h2>
+  <input type="number" id="loanUserId" placeholder="User ID">
+  <input type="number" id="loanBookId" placeholder="Book ID">
+  <input type="date" id="loanStart">
+  <input type="date" id="loanEnd">
+  <button onclick="createLoan()">Créer prêt</button>
+  <pre id="loanResult"></pre>
+
+<script>
+let token = '';
+
+async function login() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  const res = await fetch('http://localhost:3000/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+  if(data.token) {
+    token = data.token;
+    alert('Connecté avec succès !');
+  } else {
+    alert(data.error || 'Erreur de connexion');
+  }
+}
+
+async function getUsers() {
+  const res = await fetch('http://localhost:3000/api/users', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  });
+  const data = await res.json();
+  document.getElementById('users').textContent = JSON.stringify(data, null, 2);
+}
+
+async function getBooks() {
+  const res = await fetch('http://localhost:3000/api/books', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  });
+  const data = await res.json();
+  document.getElementById('books').textContent = JSON.stringify(data, null, 2);
+}
+
+async function getLoans() {
+  const userId = document.getElementById('userIdLoan').value;
+  const res = await fetch(`http://localhost:3000/api/loans/${userId}`, {
+    headers: { 'Authorization': 'Bearer ' + token }
+  });
+  const data = await res.json();
+  document.getElementById('loans').textContent = JSON.stringify(data, null, 2);
+}
+
+async function createLoan() {
+  const userId = document.getElementById('loanUserId').value;
+  const bookId = document.getElementById('loanBookId').value;
+  const startDate = document.getElementById('loanStart').value;
+  const endDate = document.getElementById('loanEnd').value;
+
+  const res = await fetch('http://localhost:3000/api/loans', {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    },
+    body: JSON.stringify({ userId, bookId, startDate, endDate })
+  });
+
+  const data = await res.json();
+  document.getElementById('loanResult').textContent = JSON.stringify(data, null, 2);
+}
+</script>
+</body>
+>>>>>>> 3f7a923807f330ecc8af89e9e15c72189e1e2164
 </html>
